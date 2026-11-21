@@ -9,6 +9,21 @@ Règles de filtrage WAF et sécurité de bordure Cloudflare, conformes aux exige
 
 Développé et maintenu par l'équipe d'ingénierie en cybersécurité périphérique de **[TAVARDT France](https://ag.tavardt.com/fr/cybersecurite/)**.
 
+> [!IMPORTANT]
+> **Architecture Universelle et Agnostique :** Ce dépôt **n'est pas réservé à WordPress**. Il a été pensé pour sécuriser les **APIs RESTful, microservices modernes, applications web (Next.js, React, Vue) et backends d'entreprise (Node.js, Python, Go, Laravel, Java)**. Le blocage des sondes CMS agit comme une **couche d'hygiène périphérique active**, supprimant le trafic parasite des botnets sur le réseau Cloudflare (< 1ms) avant qu'il ne sature la mémoire, les sockets ou le processeur de vos serveurs d'origine.
+
+---
+
+### Matrice de Protection Multi-Stack
+
+| Couche de Défense | Vecteurs Neutralisés | Applications et Stacks Protégées |
+| :--- | :--- | :--- |
+| **Isolation des Identifiants** | Blocage en périphérie de `.env`, `.git`, `.sql`, `package.json`, `composer.json` | **APIs, Next.js, Node.js, Python, Go, Laravel, React** |
+| **Suppression des Scanners** | Blocage de Nikto, SQLMap, Acunetix, Masscan, Gobuster, Nmap | **Toute application web, microservice ou passerelle d'API** |
+| **Filtrage des Verbes HTTP** | Rejet systématique des méthodes dangereuses (`TRACE`, `TRACK`, `DEBUG`) | **APIs RESTful et architectures microservices** |
+| **Accès Privilégiés Sécurisés** | Challenge comportemental sur les consoles d'accès (`/admin`, `/login`) | **Tableaux de bord d'administration, ERPs et consoles web** |
+| **Hygiène de Bordure Sans Bruit**| Rejet direct des requêtes vers `/xmlrpc.php` et les trackbacks | **Soulagement immédiat des ressources serveurs en amont** |
+
 ---
 
 ## 1. Vue d'Ensemble de l'Architecture Périphérique
