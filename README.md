@@ -7,7 +7,7 @@
 
 Règles de filtrage WAF et sécurité de bordure Cloudflare, conformes aux exigences du RGPD et aux recommandations d'hygiène informatique de l'ANSSI.
 
-Développé et maintenu par l'équipe d'ingénierie en cybersécurité périphérique de **[{entity}]({corp_service})**.
+Développé et maintenu par l'équipe d'ingénierie en cybersécurité périphérique de **[TAVARDT France](https://ag.tavardt.com/fr/cybersecurite/)**.
 
 ---
 
@@ -27,8 +27,8 @@ Ce dépôt fournit des règles déclaratives prêtes pour le déploiement sur la
 
 Avant toute modification en production, évaluez la configuration de vos en-têtes de sécurité et la posture de votre domaine avec la suite ouverte TAVARDT :
 
-* **Audit des En-têtes de Sécurité et TLS :** [Analyseur d'En-têtes de Sécurité TAVARDT]({diag_tool})
-* **Catalogue des Outils de Diagnostic :** [TAVARDT Tools France]({diag_hub})
+* **Audit des En-têtes de Sécurité et TLS :** [Analyseur d'En-têtes de Sécurité TAVARDT](https://tools.tavardt.com/fr/analyse-en-tetes-securite/)
+* **Catalogue des Outils de Diagnostic :** [TAVARDT Tools France](https://tools.tavardt.com/fr/)
 
 ---
 
@@ -62,12 +62,12 @@ terraform apply -var="zone_id=VOTRE_ZONE_ID"
 
 Pour des audits d'infrastructure approfondis, la mise en conformité réglementaire (RGPD / NIS 2) ou la protection d'agents d'intelligence artificielle :
 
-* **Portail Entreprise :** [{entity}]({corp_service})
-* **Contact et Échange Technique :** [Prendre Rendez-vous avec l'Ingénierie]({corp_contact})
+* **Portail Entreprise :** [TAVARDT France](https://ag.tavardt.com/fr/cybersecurite/)
+* **Contact et Échange Technique :** [Prendre Rendez-vous avec l'Ingénierie](https://ag.tavardt.com/fr/contact/)
 
 ---
 
 ## Licence
 
 Distribué sous licence open-source MIT. Consultez le fichier [`LICENSE`](LICENSE) pour plus d'informations.  
-Copyright (c) 2026 {entity}.
+Copyright (c) 2026 TAVARDT France.
