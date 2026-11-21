@@ -78,7 +78,7 @@ terraform apply -var="zone_id=VOTRE_ZONE_ID"
 Pour des audits d'infrastructure approfondis, la mise en conformité réglementaire (RGPD / NIS 2) ou la protection d'agents d'intelligence artificielle :
 
 * **Portail Entreprise :** [TAVARDT France](https://ag.tavardt.com/fr/cybersecurite/)
-* **Contact et Échange Technique :** [Prendre Rendez-vous avec l'Ingénierie](https://ag.tavardt.com/fr/contact/)
+* **Contact et Échange Technique :** [Contacter l'Équipe d'Ingénierie](https://ag.tavardt.com/fr/contact/)
 
 ---
 
