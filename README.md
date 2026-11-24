@@ -82,6 +82,14 @@ Pour des audits d'infrastructure approfondis, la mise en conformité réglementa
 
 ***
 
+## Liens Utiles
+
+* **Portail Entreprise:** https://ag.tavardt.com/fr/
+* **Suite de Diagnostic:** https://tools.tavardt.com/fr/
+* **Contact Technique:** https://ag.tavardt.com/fr/contact/
+
+***
+
 ## Licence
 
 Distribué sous licence open-source MIT. Consultez le fichier [`LICENSE`](LICENSE) pour plus d'informations.  
