@@ -1,4 +1,4 @@
-# Cloudflare WAF Hardening Ruleset & Guide de Sécurité Edge | TAVARDT France
+# Cloudflare WAF Hardening Ruleset & Guide de Sécurité Edge
 
 [![Licence MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Cloudflare WAF](https://img.shields.io/badge/Cloudflare-WAF%20Hardened-F38020.svg?logo=cloudflare)](https://cloudflare.com)
@@ -85,4 +85,4 @@ Pour des audits d'infrastructure approfondis, la mise en conformité réglementa
 ## Licence
 
 Distribué sous licence open-source MIT. Consultez le fichier [`LICENSE`](LICENSE) pour plus d'informations.  
-Copyright (c) 2026 TAVARDT France.
+Copyright (c) 2026 TAVARDT.
