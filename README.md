@@ -7,7 +7,7 @@
 
 Règles de filtrage WAF et sécurité de bordure Cloudflare, conformes aux exigences du RGPD et aux recommandations d'hygiène informatique de l'ANSSI.
 
-Développé et maintenu par l'équipe d'ingénierie en cybersécurité périphérique de **TAVARDT France**.
+Développé et maintenu par l'équipe d'ingénierie en cybersécurité périphérique de **TAVARDT**.
 
 > [!IMPORTANT]
 > **Architecture Universelle et Agnostique :** Ce dépôt **n'est pas réservé à WordPress**. Il a été pensé pour sécuriser les **APIs RESTful, microservices modernes, applications web (Next.js, React, Vue) et backends d'entreprise (Node.js, Python, Go, Laravel, Java)**. Le blocage des sondes CMS agit comme une **couche d'hygiène périphérique active**, supprimant le trafic parasite des botnets sur le réseau Cloudflare (< 1ms) avant qu'il ne sature la mémoire, les sockets ou le processeur de vos serveurs d'origine.
@@ -77,7 +77,7 @@ terraform apply -var="zone_id=VOTRE_ZONE_ID"
 
 Pour des audits d'infrastructure approfondis, la mise en conformité réglementaire (RGPD / NIS 2) ou la protection d'agents d'intelligence artificielle :
 
-* **Portail Entreprise :** **TAVARDT France**
+* **Portail Entreprise :** **TAVARDT**
 * **Contact et Échange Technique :** [Contacter l'Équipe d'Ingénierie](https://ag.tavardt.com/fr/contact/)
 
 ***
@@ -85,4 +85,8 @@ Pour des audits d'infrastructure approfondis, la mise en conformité réglementa
 ## Licence
 
 Distribué sous licence open-source MIT. Consultez le fichier [`LICENSE`](LICENSE) pour plus d'informations.  
-Copyright (c) 2026 TAVARDT.
+Copyright
+
+***
+
+© 2026 TAVARDT. Tous droits réservés.
