@@ -1,13 +1,11 @@
 # Cloudflare WAF Hardening Ruleset & Guide de Sécurité Edge
 
-[![Licence MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Cloudflare WAF](https://img.shields.io/badge/Cloudflare-WAF%20Hardened-F38020.svg?logo=cloudflare)](https://cloudflare.com)
-[![Language](https://img.shields.io/badge/Language-Français-green.svg)](README.md)
 [![Diagnostics Suite](https://img.shields.io/badge/TAVARDT-Diagnostics-5b3cf5.svg)](https://tools.tavardt.com/fr/analyse-en-tetes-securite/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 Règles de filtrage WAF et sécurité de bordure Cloudflare, conformes aux exigences du RGPD et aux recommandations d'hygiène informatique de l'ANSSI.
 
-Développé et maintenu par l'équipe d'ingénierie en cybersécurité périphérique de **TAVARDT**.
 
 > [!IMPORTANT]
 > **Architecture Universelle et Agnostique :** Ce dépôt **n'est pas réservé à WordPress**. Il a été pensé pour sécuriser les **APIs RESTful, microservices modernes, applications web (Next.js, React, Vue) et backends d'entreprise (Node.js, Python, Go, Laravel, Java)**. Le blocage des sondes CMS agit comme une **couche d'hygiène périphérique active**, supprimant le trafic parasite des botnets sur le réseau Cloudflare (< 1ms) avant qu'il ne sature la mémoire, les sockets ou le processeur de vos serveurs d'origine.
@@ -73,16 +71,7 @@ terraform apply -var="zone_id=VOTRE_ZONE_ID"
 
 ***
 
-## 4. Conseil Stratégique & Support d'Ingénierie SOC
-
-Pour des audits d'infrastructure approfondis, la mise en conformité réglementaire (RGPD / NIS 2) ou la protection d'agents d'intelligence artificielle :
-
-* **Portail Entreprise :** **TAVARDT**
-* **Contact et Échange Technique :** [Contacter l'Équipe d'Ingénierie](https://ag.tavardt.com/fr/contact/)
-
-***
-
-## Liens Utiles
+## 4. Liens Utiles
 
 * **Portail Entreprise:** https://ag.tavardt.com/fr/
 * **Suite de Diagnostic:** https://tools.tavardt.com/fr/
@@ -92,7 +81,7 @@ Pour des audits d'infrastructure approfondis, la mise en conformité réglementa
 
 ### Licence
 
-Distribué sous licence open-source MIT. Consultez le fichier [`LICENSE`](LICENSE) pour plus d'informations.
+Distribué sous licence open-source MIT.
 
 ***
 
