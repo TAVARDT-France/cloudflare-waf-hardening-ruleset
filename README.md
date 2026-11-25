@@ -1,87 +1,106 @@
-# Cloudflare WAF Hardening Ruleset & Guide de Sécurité Edge
+# Cloudflare WAF Hardening Ruleset et Blueprint de Sécurité Périphérique
 
 [![Cloudflare WAF](https://img.shields.io/badge/Cloudflare-WAF%20Hardened-F38020.svg?logo=cloudflare)](https://cloudflare.com)
 [![Diagnostics Suite](https://img.shields.io/badge/TAVARDT-Diagnostics-5b3cf5.svg)](https://tools.tavardt.com/fr/analyse-en-tetes-securite/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Règles de filtrage WAF et sécurité de bordure Cloudflare, conformes aux exigences du RGPD et aux recommandations d'hygiène informatique de l'ANSSI.
+***
 
+Ensemble de règles personnalisées Cloudflare WAF, atténuation des bots et blueprint de sécurité périphérique développé par **TAVARDT**, en conformité rigoureuse avec les recommandations de l'ANSSI, le RGPD et les normes ISO/IEC 27001.
 
 > [!IMPORTANT]
-> **Architecture Universelle et Agnostique :** Ce dépôt **n'est pas réservé à WordPress**. Il a été pensé pour sécuriser les **APIs RESTful, microservices modernes, applications web (Next.js, React, Vue) et backends d'entreprise (Node.js, Python, Go, Laravel, Java)**. Le blocage des sondes CMS agit comme une **couche d'hygiène périphérique active**, supprimant le trafic parasite des botnets sur le réseau Cloudflare (< 1ms) avant qu'il ne sature la mémoire, les sockets ou le processeur de vos serveurs d'origine.
+> **Architecture Périphérique Universelle et Agnostique:** Cet ensemble de règles ne se limite pas à WordPress ni aux architectures monolithiques. Il protège activement les API RESTful, les microservices modernes, les applications frontales SPA (Next.js, React, Vue) et les serveurs d'application (Node.js, Python, Go, Laravel, Java). Le filtrage précoce des requêtes ciblant d'anciens CMS constitue une hygiène périphérique proactive, éliminant le trafic parasite des botnets directement sur les centres de données Cloudflare en moins de 1ms avant d'impacter les serveurs d'origine.
 
 ***
 
-### Matrice de Protection Multi-Stack
+## Fonctionnalités Clés et Architecture Défensive
 
-| Couche de Défense | Vecteurs Neutralisés | Applications et Stacks Protégées |
-| :- | :- | :- |
-| **Isolation des Identifiants** | Blocage en périphérie de `.env`, `.git`, `.sql`, `package.json`, `composer.json` | **APIs, Next.js, Node.js, Python, Go, Laravel, React** |
-| **Suppression des Scanners** | Blocage de Nikto, SQLMap, Acunetix, Masscan, Gobuster, Nmap | **Toute application web, microservice ou passerelle d'API** |
-| **Filtrage des Verbes HTTP** | Rejet systématique des méthodes dangereuses (`TRACE`, `TRACK`, `DEBUG`) | **APIs RESTful et architectures microservices** |
-| **Accès Privilégiés Sécurisés** | Challenge comportemental sur les consoles d'accès (`/admin`, `/login`) | **Tableaux de bord d'administration, ERPs et consoles web** |
-| **Hygiène de Bordure Sans Bruit**| Rejet direct des requêtes vers `/xmlrpc.php` et les trackbacks | **Soulagement immédiat des ressources serveurs en amont** |
+* **Isolation Périphérique des Données Sensibles**: Bloque instantanément en bordure de réseau les accès à `.env`, `.git`, `.sql`, `config.json`, `package.json` et `composer.json` avant qu'ils n'atteignent l'infrastructure.
+* **Suppression des Outils de Reconnaissance**: Intercepte les scanners de vulnérabilités automatisés (Nikto, SQLMap, Acunetix, Masscan, Zgrab, Nmap, DirBuster, Gobuster) sur le réseau Cloudflare.
+* **Hygiène Périphérique Agnostique**: Neutralise les vecteurs d'attaque ciblant les CMS (`/xmlrpc.php`, trackbacks) en moins de 1ms, préservant la mémoire, la CPU et les sockets TCP des serveurs d'origine.
+* **Assainissement des Méthodes HTTP**: Rejette les verbes dangereux ou non conventionnels (`TRACE`, `TRACK`, `DEBUG`) directement au niveau du pare-feu applicatif périphérique.
+* **Défi Adaptatif pour les Portails d'Administration**: Déclenche des Défis Gérés Cloudflare sur les accès administratifs (`/admin`, `/wp-login.php`, `/administrator`), tout en autorisant le trafic d'ASN interne légitime.
 
 ***
 
-## 1. Vue d'Ensemble de l'Architecture Périphérique
+## Vecteurs de Risque et Impact Opérationnel
 
-Ce dépôt fournit des règles déclaratives prêtes pour le déploiement sur la bordure de réseau Cloudflare, assurant la protection préventive des plateformes critiques d'entreprise :
+Exposer des services web et des API publiques sans filtrage périphérique déclaratif confronte les serveurs d'origine à des sondages hostiles incessants et à l'épuisement des ressources. Le jeu de règles neutralise cinq vecteurs critiques à la périphérie du CDN :
 
-* **Isolation des Fichiers et Variables Confidentiels :** Blocage en périphérie des requêtes ciblant les fichiers `.env`, les répertoires `.git`, les sauvegardes de bases de données `.sql` et les manifestes de paquets (`composer.json`, `package.json`).
-* **Blocage des Outils d'Analyse et d'Exploitation :** Neutralisation en temps réel des scanners automatisés malveillants (Nikto, SQLMap, Acunetix, Masscan, Nmap, Gobuster, DirBuster).
-* **Durcissement et Blindage des CMS :** Interception préventive des abus dirigés contre `/xmlrpc.php` et `/wp-trackback.php`.
-* **Filtrage des Verbes HTTP Dangereux :** Rejet systématique des méthodes de débogage risquées (`TRACE`, `TRACK`, `DEBUG`).
-* **Challenge Géré sur les Accès d'Administration :** Déploiement de défis comportementaux transparents pour sécuriser les points d'entrée privilégiés (`/wp-login.php`, `/admin`).
-
-***
-
-## 2. Audit et Diagnostic de Sécurité Préalable
-
-Avant toute modification en production, évaluez la configuration de vos en-têtes de sécurité et la posture de votre domaine avec la suite ouverte TAVARDT :
-
-* **Audit des En-têtes de Sécurité et TLS :** Analyseur d'En-têtes de Sécurité TAVARDT
-* **Catalogue des Outils de Diagnostic :** **TAVARDT Tools France**
+* **Divulgation de Données de Configuration et Identifiants (TAVARDT-WAF-01)**: Exploitation de mauvaises configurations d'origine pour télécharger des fichiers d'environnement, des dépôts Git et des sauvegardes SQL.
+* **Scanners Automatisés d'Exploitation (TAVARDT-WAF-02)**: Sondages intensifs d'outils de balayage qui consomment de la bande passante, saturent le processeur et cherchent des failles non corrigées.
+* **Attaques par Amplification et Force Brute (TAVARDT-WAF-03 et TAVARDT-WAF-05)**: Réseaux zombies tentant d'amplifier des attaques par déni de service via XML-RPC ou menant des attaques par dictionnaire sur les portails d'accès.
+* **Détournement de Protocole via Verbes HTTP Inadéquats (TAVARDT-WAF-04)**: Acteurs malveillants exploitant des méthodes obsolètes pour contourner le cache, exécuter du cross-site tracing (XST) ou forcer des modes de débogage.
+* **Épuisement des Ressources et Indisponibilité du Serveur d'Origine**: Trafic malveillant non filtré qui sature les processus applicatifs, générant des ralentissements et des interruptions pour les usagers légitimes.
 
 ***
 
-## 3. Guide de Déploiement Rapide
+## Déploiement et Automatisation Périphérique
 
-### Option A : Déploiement via l'API v4 Cloudflare
+Appliquez le jeu de règles défensives au moyen de l'API déclarative v4 de Cloudflare ou par le biais de l'infrastructure as code avec Terraform :
 
-Appliquez directement le jeu de règles [`rules/ruleset.json`](rules/ruleset.json) :
+### Option A : Ingestion Directe via Cloudflare API v4
 
 ```bash
-curl -X PUT "https://api.cloudflare.com/client/v4/zones/VOTRE_ZONE_ID/rulesets/phases/http_request_firewall_custom/entrypoint" \
-     -H "Authorization: Bearer VOTRE_CLOUDFLARE_API_TOKEN" \
-     -H "Content-Type: application/json" \
-     -data @rules/ruleset.json
+# Déployer les règles de pare-feu personnalisées via l'API Cloudflare v4
+curl -X PUT "https://api.cloudflare.com/client/v4/zones/YOUR_ZONE_ID/rulesets/phases/http_request_firewall_custom/entrypoint" \
+  -H "Authorization: Bearer YOUR_CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d @rules/ruleset.json
 ```
 
-### Option B : Automatisation Déclarative via Terraform
-
-Utilisez le module Terraform situé dans [`terraform/main.tf`](terraform/main.tf) :
+### Option B : Déploiement Déclaratif via Terraform
 
 ```bash
+# Naviguer vers le répertoire du module Terraform
 cd terraform
+
+# Initialiser le fournisseur Cloudflare
 terraform init
-terraform plan -var="zone_id=VOTRE_ZONE_ID"
-terraform apply -var="zone_id=VOTRE_ZONE_ID"
+
+# Planifier le déploiement déclaratif des règles
+terraform plan -var="zone_id=YOUR_ZONE_ID"
+
+# Appliquer la configuration de pare-feu périphérique
+terraform apply -var="zone_id=YOUR_ZONE_ID"
 ```
 
 ***
 
-## 4. Liens Utiles
+## Foire Aux Questions Techniques
 
-* **Portail Entreprise:** https://ag.tavardt.com/fr/
+### Quels vecteurs de vulnérabilité le jeu de règles Cloudflare WAF neutralise-t-il en périphérie de réseau ?
+
+Le jeu de règles neutralise les scanners de reconnaissance automatisés, les tentatives d'extraction de fichiers de configuration sensibles, l'exploitation de XML-RPC et les méthodes HTTP de débogage directement sur les serveurs Cloudflare. Ce filtrage précoce stoppe le trafic malveillant en moins d'une milliseconde, protégeant la CPU, la mémoire vive et les connexions de base de données du serveur d'origine.
+
+### Pourquoi ce modèle de durcissement est-il recommandé pour les API REST et microservices au-delà des CMS ?
+
+Les robots malveillants parcourent les points de terminaison publics sans distinction d'architecture, que le service soit propulsé par Node.js, Go, Python ou Next.js. Écarter les requêtes parasites de CMS et les sondes de fichiers de configuration en amont préserve la fluidité opérationnelle de l'ensemble des services applicatifs.
+
+### Comment le jeu de règles empêche-t-il la fuite accidentelle d'identifiants et de sauvegardes de bases de données ?
+
+La règle TAVARDT-WAF-01 applique un blocage immédiat HTTP 403 pour toute requête ciblant `.env`, `.git`, `.sql`, `composer.json` ou `package.json`. Ce verrouillage déterministe sur le réseau CDN évite qu'une erreur de routage du serveur web ne divulgue des clés d'API et des structures de données sensibles.
+
+### Comment la protection des interfaces d'administration fonctionne-t-elle sans bloquer les flux autorisés ?
+
+La règle TAVARDT-WAF-05 soumet les accès aux chemins sensibles comme `/wp-login.php`, `/admin` ou `/administrator` à un Défi Géré Cloudflare. Elle intègre une exception dédiée pour l'ASN 13335 de Cloudflare, permettant aux outils de supervision et aux processus autorisés de fonctionner sans interruption.
+
+### Quelles sont les distinctions techniques entre l'ingestion API v4 et le provisionnement Terraform ?
+
+L'importation de `rules/ruleset.json` via l'API v4 permet une mise en production rapide sans dépendance logicielle sur la phase `http_request_firewall_custom`. L'utilisation du module `terraform/main.tf` permet d'intégrer la sécurité dans les chaînes d'infrastructure as code, de suivre les versions et d'assurer une gouvernance homogène sur plusieurs zones.
+
+***
+
+## Liens Utiles
+
+* **Portail Institutionnel:** https://ag.tavardt.com/fr/
 * **Suite de Diagnostic:** https://tools.tavardt.com/fr/
 * **Contact Technique:** https://ag.tavardt.com/fr/contact/
 
 ***
 
 ### Licence
-
-Distribué sous licence open-source MIT.
+Distribué sous la Licence MIT. Consultez [LICENSE](LICENSE) pour obtenir tous les détails.
 
 ***
 
