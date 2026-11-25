@@ -90,10 +90,9 @@ Pour des audits d'infrastructure approfondis, la mise en conformité réglementa
 
 ***
 
-## Licence
+### Licence
 
-Distribué sous licence open-source MIT. Consultez le fichier [`LICENSE`](LICENSE) pour plus d'informations.  
-Copyright
+Distribué sous licence open-source MIT. Consultez le fichier [`LICENSE`](LICENSE) pour plus d'informations.
 
 ***
 
